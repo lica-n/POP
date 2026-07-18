@@ -49,6 +49,16 @@ h1, h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-weight:
 .survey-figure-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
 .survey-figure { margin: 0; border: 1px solid var(--line); background: #fff; }
 .survey-figure img { display: block; width: 100%; aspect-ratio: 1.89; object-fit: cover; background: #edf1ee; }
+
+.zoom-img {
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+.zoom-img:active {
+  transform: scale(1.6);
+  z-index: 99;
+  position: relative;
+}
 .survey-figure figcaption { display: grid; gap: 8px; padding: 18px 20px 21px; color: var(--muted); font-size: 13px; line-height: 1.55; }
 .survey-figure figcaption strong { color: var(--ink); font-size: 15px; }
 
@@ -58,7 +68,39 @@ h1, h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-weight:
 .stats div { min-width: 76px; padding-left: 16px; border-left: 1px solid var(--line); }
 .stats strong { display: block; font: 400 33px/1 Georgia, serif; }
 .stats span { display: block; margin-top: 6px; color: var(--muted); font-size: 10px; letter-spacing: .09em; text-transform: uppercase; }
-.catalogue-controls { align-items: center; margin-top: 52px; }
+.catalogue-controls { align-items: center; margin-top: 52px; flex-direction: column; align-items: flex-start; gap: 1rem; }
+
+.table-tool {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.btn:hover {
+  filter: brightness(0.9);
+}
+.page-pager {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+.page-desc {
+  opacity: 0.7;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
 .tab-list { display: flex; gap: 22px; }
 .tab-list button { padding: 0 0 10px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--muted); cursor: pointer; font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
 .tab-list button.active { border-bottom-color: var(--blue); color: var(--ink); }
@@ -74,10 +116,68 @@ td strong { display: block; color: var(--ink); font-weight: 700; }
 td small { display: block; margin-top: 4px; color: var(--muted); }
 .coord { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; line-height: 1.65; }
 
+.copy-btn {
+  margin-left: 8px;
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 2px 6px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+.copy-btn:hover {
+  filter: brightness(0.9);
+}
+
 .citation { padding: 95px 0 105px; border-top: 1px solid var(--line); }
 .citation p:not(.section-kicker) { max-width: 700px; margin-top: 28px; color: var(--muted); font-size: 17px; line-height: 1.7; }
+.bibtex-block {
+  margin: 1.5rem 0;
+}
+#bibtex-text {
+  background: #edf1ee;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  overflow-x: auto;
+  font-family: ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--ink);
+}
+.faq-list {
+  padding-left: 1.4rem;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-top: 0.8rem;
+}
+.faq-list strong {
+  color: var(--ink);
+}
+
 footer { display: flex; justify-content: space-between; gap: 20px; padding: 27px 6vw; background: var(--navy); color: #aebfc5; font-size: 11px; letter-spacing: .06em; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+
+.scroll-top-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--blue);
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+.scroll-top-btn.show {
+  opacity: 1;
+  visibility: visible;
+}
 
 @media (max-width: 760px) {
   .site-header { height: 65px; padding: 0 6vw; }
@@ -100,4 +200,9 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding: 27px
   .search-field, .search-field input { width: 100%; }
   .citation { padding: 74px 0; }
   footer { flex-direction: column; }
+  .table-tool {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
